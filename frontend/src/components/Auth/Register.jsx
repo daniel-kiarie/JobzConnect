@@ -19,7 +19,7 @@ import toast from "react-hot-toast";
 import { Context } from "../../main";
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+  import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 const Register = () => {
   const [email, setEmail] = useState("");
