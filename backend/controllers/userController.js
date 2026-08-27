@@ -37,7 +37,7 @@ export const login = catchAsyncErrors(async (req, res, next) => {
   }
   if (user.role !== role) {
     return next(
-      new ErrorHandler(`User with provided email and ${role} not found !`, 404)
+      new ErrorHandler(`User with provided email and ${role} not found !`, 404),
     );
   }
   sendToken(user, 201, res, "User Logged In Sucessfully !");
@@ -48,6 +48,8 @@ export const logout = catchAsyncErrors(async (req, res, next) => {
     .status(201)
     .cookie("token", "", {
       httpOnly: true,
+      secure: true,
+      sameSite: "none",
       expires: new Date(0),
       path: "/",
     })
@@ -56,7 +58,6 @@ export const logout = catchAsyncErrors(async (req, res, next) => {
       message: "Logged Out Successfully !",
     });
 });
-
 
 export const getUser = catchAsyncErrors((req, res, next) => {
   const user = req.user;
